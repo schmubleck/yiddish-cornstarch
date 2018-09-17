@@ -1,11 +1,22 @@
 # yiddish-cornstarch
 SE390 Mini-Project, code quality tutorial tool
 
+## Setup
+
+    $ npm install
+
+This will install the packages required.
+
+    $ npm start
+
+This will build the dev version of the project and open a browser to the home
+page.
+
 ## Deployment
 
 Run
 
-  $ npm run deploy
+    $ npm run deploy
 
 which will do the following:
 * build the project
