@@ -2,28 +2,35 @@
 // TODO(zhyty): reenable max-classes-per-file once we're past playing around.
 import * as React from 'react';
 
-// TODO(zhyty): this is just a stub. Will be need to be updated when Lessons are implemented.
-interface ILessonProps {
-  exercises: string[];
+// TODO(zhyty): these are just stubs. Will be need to be updated when Lessons
+// are implemented.
+interface IExercise {
   title: string;
+  // we'll need to fill this out.
 }
 
-function LessonFrame(props: ILessonProps) {
+interface ILesson {
+  title: string;
+  exercises: IExercise[];
+  // we'll need to fill this out too.
+}
+
+function LessonFrame(lesson: ILesson) {
   return (
     <div className="lesson-frame">
       <h1 className="lesson-frame-title">
-        Lesson: {props.title}
+        Lesson: {lesson.title}
       </h1>
-      <LessonInteractiveArea {...props} />
+      <LessonInteractiveArea {...lesson} />
     </div>
   );
 }
 
-function LessonInteractiveArea(props: ILessonProps) {
+function LessonInteractiveArea(lesson: ILesson) {
   const exercisesListItems = [];
-  for (const exercise of props.exercises) {
+  for (const exercise of lesson.exercises) {
     exercisesListItems.push(
-      <li>{exercise}</li>
+      <li>{exercise.title}</li>
     );
   }
 
@@ -50,8 +57,8 @@ class App extends React.Component {
 
 const SAMPLE_LESSON = {
   exercises: [
-    'Find the meaning of Schmubleck.',
-    'Highlight the bad code in this sample.',
+    {title: 'Find the meaning of Schmubleck.'},
+    {title: 'Highlight the bad code in this sample.'},
   ],
   title: 'What is Yiddish Cornstarch?',
 };
