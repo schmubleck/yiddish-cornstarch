@@ -1,7 +1,6 @@
 /* tslint:disable:max-classes-per-file */
 // TODO(zhyty): reenable max-classes-per-file once we're past playing around.
 import * as React from 'react';
-import './App.css';
 
 // TODO(zhyty): this is just a stub. Will be need to be updated when Lessons are implemented.
 interface ILessonProps {
