@@ -2,11 +2,14 @@
 // TODO(zhyty): reenable max-classes-per-file once we're past playing around.
 import * as React from 'react';
 
+import * as Snippet from './Snippet';
+
 // TODO(zhyty): these are just stubs. Will be need to be updated when Lessons
 // are implemented.
 interface IExercise {
   title: string;
   // we'll need to fill this out.
+  content: Snippet.ISnippet;
 }
 
 interface ILesson {
@@ -30,7 +33,7 @@ function LessonInteractiveArea(lesson: ILesson) {
   const exercisesListItems = [];
   for (const exercise of lesson.exercises) {
     exercisesListItems.push(
-      <li>{exercise.title}</li>
+      <Snippet.SnippetFrame {...exercise.content} />
     );
   }
 
@@ -57,8 +60,8 @@ class App extends React.Component {
 
 const SAMPLE_LESSON = {
   exercises: [
-    {title: 'Find the meaning of Schmubleck.'},
-    {title: 'Highlight the bad code in this sample.'},
+    {title: 'Find the meaning of Schmubleck.', content: {blocks: ['int main() {\n', 'std::cout << "hi\\n";\n', '}']}},
+    {title: 'Highlight the bad code in this sample.', content: {blocks: ['int main() {\n', 'std::cout << "hi\\n";\n', '}']}},
   ],
   title: 'What is Yiddish Cornstarch?',
 };
