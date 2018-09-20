@@ -29,13 +29,13 @@ class Snippet extends React.Component<ISnippetProps, {}> {
   }
 
   public render() {
-    const childs = [];
+    const children = [];
     for (let i = 0; i < this.props.blocks.length; i++) {
-      childs.push(<Block.Block key={i} {...this.props.blocks[i]} language={this.props.lang}/>);
+      children.push(<Block.Block key={i} {...this.props.blocks[i]} language={this.props.lang}/>);
     }
     return (
       <pre className={"language-" + this.props.lang}>
-        {childs}
+        {children}
       </pre>
     );
   }
