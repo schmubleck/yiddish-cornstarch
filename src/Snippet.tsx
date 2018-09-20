@@ -10,20 +10,13 @@ import './snippet.css';
 
 Prism.highlightAll();
 
-interface ISnippet {
-  blocks: string[];
-}
-
-function SnippetFrame(code: ISnippet) {
-  return (
-    <pre><code className="lang-clike">
-    {...code.blocks}
-    </code></pre>
-  );
+interface IBlock {
+  code: string;
+  good: boolean;
 }
 
 interface ISnippetProps {
-  blocks: string[];
+  blocks: IBlock[];
   lang: string;
 }
 
@@ -57,16 +50,14 @@ class Snippet extends React.Component<ISnippetProps, ISnippetState> {
     const classes = langclass + " block";
     for (let i = 0; i < this.props.blocks.length; i++) {
       const blkclss = classes + " " + highlightCssClass(this.state.highlight[i]);
-      rb.push(<div className={blkclss}>
-        <code className={blkclss}>{this.props.blocks[i]}</code>
-      </div>)
+      rb.push(<code className={blkclss}>{this.props.blocks[i].code}</code>);
     }
     return (
       <pre className={langclass}>
-        {...rb}
+        {rb}
       </pre>
     );
   }
 }
 
-export {ISnippetProps, Snippet, SnippetFrame, ISnippet};
+export {Snippet, ISnippetProps};
