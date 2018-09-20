@@ -5,4 +5,11 @@ code.block {
 }
 code.block.none:hover {
     background: #4c4e41;
+    cursor: grab;
+}
+code.block.bad {
+    background: #ff00009c;
+}
+code.block.good {
+    background: #3dea73a3;
 }

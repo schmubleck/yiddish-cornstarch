@@ -33,7 +33,7 @@ function LessonInteractiveArea(lesson: ILesson) {
   const exercisesListItems = [];
   for (const exercise of lesson.exercises) {
     exercisesListItems.push(
-      <Snippet.Snippet {...exercise.content} />
+      <Snippet.Snippet key={exercise.title} {...exercise.content} />
     );
   }
 
