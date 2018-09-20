@@ -6,6 +6,8 @@ import Prism from 'prismjs';
 import 'prismjs/components/prism-python.min.js';
 import 'prismjs/themes/prism-okaidia.css';
 
+import './snippet.css';
+
 Prism.highlightAll();
 
 interface ISnippet {
@@ -27,9 +29,12 @@ interface ISnippetProps {
 
 enum Highlight {
   None = 1,
-  Hover,
   Good,
   Bad,
+}
+
+function highlightCssClass(h: Highlight) {
+  return Highlight[h].toLowerCase();
 }
 
 interface ISnippetState {
@@ -48,12 +53,16 @@ class Snippet extends React.Component<ISnippetProps, ISnippetState> {
 
   public render() {
     const rb = [];
-    const clss = "lang-" + this.props.lang;
-    for (const block of this.props.blocks) {
-      rb.push(<code className={clss}>{block}</code>)
+    const langclass = "language-" + this.props.lang;
+    const classes = langclass + " block";
+    for (let i = 0; i < this.props.blocks.length; i++) {
+      const blkclss = classes + " " + highlightCssClass(this.state.highlight[i]);
+      rb.push(<div className={blkclss}>
+        <code className={blkclss}>{this.props.blocks[i]}</code>
+      </div>)
     }
     return (
-      <pre>
+      <pre className={langclass}>
         {...rb}
       </pre>
     );
