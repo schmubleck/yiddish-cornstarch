@@ -34,7 +34,6 @@ function LessonInteractiveArea(lesson: ILesson) {
   for (const exercise of lesson.exercises) {
     exercisesListItems.push(
       <Snippet.Snippet {...exercise.content} />
-      // <Snippet.SnippetFrame {...exercise.content} />
     );
   }
 
@@ -61,8 +60,27 @@ class App extends React.Component {
 
 const SAMPLE_LESSON = {
   exercises: [
-    {title: 'Find the meaning of Schmubleck.', content: {blocks: ['def main():\n', '    print("hi")\n'], lang: 'python'}},
-    {title: 'Highlight the bad code in this sample.', content: {blocks: ['int main() {\n', '    std::cout << "hi\\n";\n', '}'], lang: 'clike'}},
+    {
+      title: 'Find the meaning of Schmubleck.',
+      content: {
+        blocks: [
+          {code: 'def main():\n', good: false},
+          {code: '    print("hello")\n    print("world")\n', good: true},
+        ],
+        lang: 'python',
+      },
+    },
+    {
+      title: 'Highlight the bad code in this sample.',
+      content: {
+        blocks: [
+          {code: 'int main() {\n', good: true},
+          {code: '    std::cout << "hi\\n";\n', good: false},
+          {code: '}', good: true},
+        ],
+        lang: 'clike',
+      },
+    },
   ],
   title: 'What is Yiddish Cornstarch?',
 };
