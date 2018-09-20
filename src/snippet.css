@@ -1,0 +1,7 @@
+div.block {
+    width: 100%;
+    border-radius: 5px;
+}
+div.block.none:hover, div:hover > code.block.none{
+    background: #4c4e41;
+}
