@@ -1,7 +1,8 @@
-div.block {
+code.block {
     width: 100%;
     border-radius: 5px;
+    display: block;
 }
-div.block.none:hover, div:hover > code.block.none{
+code.block.none:hover {
     background: #4c4e41;
 }
