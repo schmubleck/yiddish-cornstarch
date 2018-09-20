@@ -8,6 +8,8 @@ import 'prismjs/themes/prism-okaidia.css';
 
 import './snippet.css';
 
+import * as Block from './Block'
+
 Prism.highlightAll();
 
 interface IBlock {
@@ -20,41 +22,20 @@ interface ISnippetProps {
   lang: string;
 }
 
-enum Highlight {
-  None = 1,
-  Good,
-  Bad,
-}
-
-function highlightCssClass(h: Highlight) {
-  return Highlight[h].toLowerCase();
-}
-
-interface ISnippetState {
-  highlight: Highlight[];
-}
-
-class Snippet extends React.Component<ISnippetProps, ISnippetState> {
+class Snippet extends React.Component<ISnippetProps, {}> {
   constructor(props: ISnippetProps) {
     super(props);
-    const hls = [];
-    for (const _ of props.blocks) {
-      hls.push(Highlight.None);
-    }
-    this.state = { highlight: hls }
+    this.state = {};
   }
 
   public render() {
-    const rb = [];
-    const langclass = "language-" + this.props.lang;
-    const classes = langclass + " block";
+    const childs = [];
     for (let i = 0; i < this.props.blocks.length; i++) {
-      const blkclss = classes + " " + highlightCssClass(this.state.highlight[i]);
-      rb.push(<code className={blkclss}>{this.props.blocks[i].code}</code>);
+      childs.push(<Block.Block key={i} {...this.props.blocks[i]} language={this.props.lang}/>);
     }
     return (
-      <pre className={langclass}>
-        {rb}
+      <pre className={"language-" + this.props.lang}>
+        {childs}
       </pre>
     );
   }
