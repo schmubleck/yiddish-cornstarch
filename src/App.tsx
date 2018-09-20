@@ -9,7 +9,7 @@ import * as Snippet from './Snippet';
 interface IExercise {
   title: string;
   // we'll need to fill this out.
-  content: Snippet.ISnippet;
+  content: Snippet.ISnippetProps;
 }
 
 interface ILesson {
@@ -33,7 +33,8 @@ function LessonInteractiveArea(lesson: ILesson) {
   const exercisesListItems = [];
   for (const exercise of lesson.exercises) {
     exercisesListItems.push(
-      <Snippet.SnippetFrame {...exercise.content} />
+      <Snippet.Snippet {...exercise.content} />
+      // <Snippet.SnippetFrame {...exercise.content} />
     );
   }
 
@@ -60,8 +61,8 @@ class App extends React.Component {
 
 const SAMPLE_LESSON = {
   exercises: [
-    {title: 'Find the meaning of Schmubleck.', content: {blocks: ['int main() {\n', 'std::cout << "hi\\n";\n', '}']}},
-    {title: 'Highlight the bad code in this sample.', content: {blocks: ['int main() {\n', 'std::cout << "hi\\n";\n', '}']}},
+    {title: 'Find the meaning of Schmubleck.', content: {blocks: ['def main():\n', '    print("hi")\n'], lang: 'python'}},
+    {title: 'Highlight the bad code in this sample.', content: {blocks: ['int main() {\n', '    std::cout << "hi\\n";\n', '}'], lang: 'clike'}},
   ],
   title: 'What is Yiddish Cornstarch?',
 };
