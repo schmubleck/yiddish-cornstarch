@@ -4,7 +4,7 @@ def is_numberwang(n):
         * In base 10, the digit '1' appears before the digit '2'
         * In base 10, the last digit is not six
     """
-    return n % 2 == 0 and str(n).find('1') < str(n).find('2') and str(n)[-1] == 6
+    return n % 2 == 0 and str(n).find('1') < str(n).find('2') and not str(n)[-1] == 6
 
 
 """ Better: split off cases
