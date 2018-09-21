@@ -1,9 +1,11 @@
 /* tslint:disable:max-classes-per-file */
 // TODO(zhyty): reenable max-classes-per-file once we're past playing around.
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
-import * as Snippet from './Snippet';
+import { ExampleNames } from './Examples';
 
+/*
 // TODO(zhyty): these are just stubs. Will be need to be updated when Lessons
 // are implemented.
 interface IExercise {
@@ -44,6 +46,20 @@ function LessonInteractiveArea(lesson: ILesson) {
     </div>
   );
 }
+*/
+
+function ExampleLinks() {
+  const examples = [];
+  for (const name of ExampleNames()) {
+    examples.push(<li><Link to={"/example/" + name}>{name}</Link></li>);
+  }
+  return (
+    <div>
+      <h2>Examples</h2>
+      <ul>{examples}</ul>
+    </div>
+  );
+}
 
 class App extends React.Component {
   public render() {
@@ -52,12 +68,13 @@ class App extends React.Component {
         <header className="App-header">
           <h1 className="App-title">Yiddish Cornstarch</h1>
         </header>
-        <LessonFrame {...SAMPLE_LESSON} />
+        <ExampleLinks />
       </div>
     );
   }
 }
 
+/*
 const SAMPLE_LESSON = {
   exercises: [
     {
@@ -84,5 +101,6 @@ const SAMPLE_LESSON = {
   ],
   title: 'What is Yiddish Cornstarch?',
 };
+*/
 
 export default App;
