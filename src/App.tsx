@@ -51,7 +51,7 @@ function LessonInteractiveArea(lesson: ILesson) {
 function ExampleLinks() {
   const examples = [];
   for (const name of ExampleNames()) {
-    examples.push(<li><Link to={"/example/" + name}>{name}</Link></li>);
+    examples.push(<li key={name}><Link to={"/example/" + name}>{name}</Link></li>);
   }
   return (
     <div>
