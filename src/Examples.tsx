@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link, RouteComponentProps } from 'react-router-dom';
 
 import * as Snippet from "./Snippet";
 
@@ -28,11 +29,26 @@ function GetExample(name: string) {
     return ParseExample(sources[name]);
 }
 
-class Example extends React.Component {
+class Example extends React.Component<RouteComponentProps<any>, {}> {
+  constructor(props: RouteComponentProps) {
+    super(props);
+  }
+
   public render() {
-    return (
-      <Snippet.Snippet {...GetExample("simple")} />
-    );
+    const name = this.props.match.params.name;
+    if (name in sources) {
+      return (
+        <Snippet.Snippet {...GetExample("simple")} />
+      );
+    } else {
+      return (
+        <div>
+          <Link to="/">
+            <h1>Example {name} not found.  Click here to return home.</h1>
+          </Link>
+        </div>
+      );
+    }
   }
 }
 
