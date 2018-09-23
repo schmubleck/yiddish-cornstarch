@@ -3,19 +3,11 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 
 import * as Snippet from "./Snippet";
 
-import Simple from "./examples/Simple";
+import Registry from "./ExampleRegistry";
 
 interface IExample {
     lang: string;
     code: string;
-}
-
-const sources = {
-  "simple": Simple,
-};
-
-function ExampleNames() {
-  return Object.keys(sources);
 }
 
 function ParseExample(ex: IExample): Snippet.ISnippetProps {
@@ -26,7 +18,7 @@ function ParseExample(ex: IExample): Snippet.ISnippetProps {
 }
 
 function GetExample(name: string) {
-  return ParseExample(sources[name]);
+  return ParseExample(Registry[name]);
 }
 
 interface IMatchParams {
@@ -40,7 +32,7 @@ class Example extends React.Component<RouteComponentProps<IMatchParams>, {}> {
 
   public render() {
     const name = this.props.match.params.name;
-    if (name in sources) {
+    if (name in Registry) {
       return (
         <div>
           <h1>Find the lines that should be changed/fixed</h1>
@@ -59,4 +51,4 @@ class Example extends React.Component<RouteComponentProps<IMatchParams>, {}> {
   }
 }
 
-export {Example, GetExample, ExampleNames};
+export {Example, GetExample};

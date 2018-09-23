@@ -3,13 +3,12 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { ExampleNames } from './Examples';
+import Registry from './ExampleRegistry';
 
 function ExampleLinks() {
-  const examples = [];
-  for (const name of ExampleNames()) {
-    examples.push(<li key={name}><Link to={"/examples/" + name}>{name}</Link></li>);
-  }
+  const examples = Object.keys(Registry)
+    .map((name) => (<li key={name}><Link to={"/examples/" + name}>{name}</Link></li>));
+
   return (
     <div>
       <h2>Examples</h2>
