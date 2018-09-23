@@ -3,7 +3,7 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 
 import * as Snippet from "./Snippet";
 
-import * as Simple from "./examples/Simple";
+import Simple from "./examples/Simple";
 
 interface IExample {
     lang: string;
@@ -26,11 +26,15 @@ function ParseExample(ex: IExample): Snippet.ISnippetProps {
 }
 
 function GetExample(name: string) {
-    return ParseExample(sources[name]);
+  return ParseExample(sources[name]);
 }
 
-class Example extends React.Component<RouteComponentProps<any>, {}> {
-  constructor(props: RouteComponentProps) {
+interface IMatchParams {
+  name: string;
+}
+
+class Example extends React.Component<RouteComponentProps<IMatchParams>, {}> {
+  constructor(props: RouteComponentProps<IMatchParams>) {
     super(props);
   }
 
@@ -38,7 +42,10 @@ class Example extends React.Component<RouteComponentProps<any>, {}> {
     const name = this.props.match.params.name;
     if (name in sources) {
       return (
-        <Snippet.Snippet {...GetExample("simple")} />
+        <div>
+          <h1>Find the lines that should be changed/fixed</h1>
+          <Snippet.Snippet {...GetExample(name)} />
+        </div>
       );
     } else {
       return (
