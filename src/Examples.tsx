@@ -11,10 +11,18 @@ interface IExample {
 }
 
 function ParseExample(ex: IExample): Snippet.ISnippetProps {
-    return {
-        blocks: [{code: "def main():", good: false}] as Snippet.IBlock[],
-        lang: "python",
-    };
+  const blocks = ex.code
+    .split('@')
+    .slice(1)
+    .map((s) => ({
+      code: s.slice(1),
+      good: s[0] === 'G',
+    }));
+
+  return {
+    blocks,
+    lang: ex.lang,
+  };
 }
 
 function GetExample(name: string) {
