@@ -3,7 +3,7 @@ code.block {
     border-radius: 5px;
     display: block;
 }
-code.block.none:hover {
+code.block.none:not(.locked):hover {
     background: #4c4e41;
     cursor: grab;
 }

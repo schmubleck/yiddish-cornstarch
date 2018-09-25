@@ -14,6 +14,7 @@ Prism.plugins.customClass.prefix('prism--');
 interface ISnippetProps {
   blocks: Block.IBlock[];
   lang: string;
+  locked: boolean;
 }
 
 class Snippet extends React.Component<ISnippetProps, {}> {
@@ -32,7 +33,7 @@ class Snippet extends React.Component<ISnippetProps, {}> {
     return (
       <pre className={`language-${this.props.lang}`}>
         {this.props.blocks.map((block, ii) =>
-          <Block.Block key={ii} {...this.props.blocks[ii]} language={this.props.lang} />
+          <Block.Block key={ii} {...this.props.blocks[ii]} language={this.props.lang} locked={this.props.locked} />
         )}
       </pre>
     );
