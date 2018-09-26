@@ -1,16 +1,8 @@
 import * as React from 'react';
 
-
-import Prism from 'prismjs';
-
-import 'prismjs/components/prism-python.min.js';
-import 'prismjs/themes/prism-okaidia.css';
-
 import './snippet.css';
 
 import * as Block from './Block'
-
-Prism.highlightAll();
 
 interface IBlock {
   code: string;
