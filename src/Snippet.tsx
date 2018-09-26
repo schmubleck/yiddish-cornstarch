@@ -41,4 +41,4 @@ class Snippet extends React.Component<ISnippetProps, {}> {
   }
 }
 
-export {Snippet, ISnippetProps};
+export {Snippet, ISnippetProps, IBlock};
