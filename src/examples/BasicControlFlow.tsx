@@ -2,9 +2,10 @@ const ex = {
     lang: "python",
     code:
 `
-def foobaz(n):
+@Gdef foobaz(n):
+    """Returns whether n is negative, zero, positive, or super positive."""
 @B    result = None
-    if n < 0:
+@G    if n < 0:
         result = "negative"
 @B    else:
         if n == 0:
