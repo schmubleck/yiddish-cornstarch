@@ -4,13 +4,8 @@ import './snippet.css';
 
 import * as Block from './Block'
 
-interface IBlock {
-  code: string;
-  good: boolean;
-}
-
 interface ISnippetProps {
-  blocks: IBlock[];
+  blocks: Block.IBlock[];
   lang: string;
 }
 
@@ -33,4 +28,4 @@ class Snippet extends React.Component<ISnippetProps, {}> {
   }
 }
 
-export {Snippet, ISnippetProps, IBlock};
+export {Snippet, ISnippetProps};

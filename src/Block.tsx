@@ -5,15 +5,24 @@ import Prism from 'prismjs';
 import 'prismjs/components/prism-python.min.js';
 import 'prismjs/themes/prism-okaidia.css';
 
+enum BlockType {
+  Ignore,
+  Good,
+  Bad,
+}
 
-interface IBlockProps {
+interface IBlock {
   code: string;
-  good: boolean;
+  typ: BlockType;
+}
+
+interface IBlockProps extends IBlock {
   language: string;
 }
 
 enum Highlight {
   None = 1,
+  Ignore,
   Good,
   Bad,
 }
@@ -29,7 +38,7 @@ interface IBlockState {
 class Block extends React.Component<IBlockProps, IBlockState> {
   constructor(props: IBlockProps) {
     super(props);
-    this.state = { hl: Highlight.None };
+    this.state = { hl: props.typ === BlockType.Ignore ? Highlight.Ignore : Highlight.None };
   }
 
   public render() {
@@ -42,7 +51,7 @@ class Block extends React.Component<IBlockProps, IBlockState> {
 
   private click = (e: any) => {
     this.setState((state: IBlockState, props: IBlockProps) => ({
-      hl: state.hl !== Highlight.None ? state.hl : (props.good ? Highlight.Good : Highlight.Bad),
+      hl: state.hl !== Highlight.None ? state.hl : (props.typ === BlockType.Good ? Highlight.Good : Highlight.Bad),
     }));
   }
 
@@ -53,4 +62,4 @@ class Block extends React.Component<IBlockProps, IBlockState> {
   };
 }
 
-export {Block, IBlockProps};
+export {Block, IBlock, IBlockProps, BlockType};
