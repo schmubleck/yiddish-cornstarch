@@ -35,6 +35,23 @@ interface IBlockState {
   hl: Highlight;
 }
 
+function setCodeRef(element: HTMLPreElement) {
+  if (element !== null) {
+    Prism.highlightElement(element, false);
+  }
+}
+
+function blockTypeToHighlight(blockType: BlockType) {
+  switch(blockType) {
+    case BlockType.Good:
+      return Highlight.Good;
+    case BlockType.Bad:
+      return Highlight.Bad;
+    case BlockType.Ignore:
+      return Highlight.Ignore;
+  }
+}
+
 class Block extends React.Component<IBlockProps, IBlockState> {
   constructor(props: IBlockProps) {
     super(props);
@@ -42,23 +59,23 @@ class Block extends React.Component<IBlockProps, IBlockState> {
   }
 
   public render() {
-    const langclass = "language-" + this.props.language;
-    const classes = langclass + " block " + highlightCssClass(this.state.hl);
-    return (<code className={classes} onClick={this.click} ref={this.setCodeRef}>
-      {this.props.code}
-    </code>);
+    const classes = "language-" + this.props.language + " block " +
+      highlightCssClass(this.state.hl);
+    return (
+      <code className={classes} onClick={this.click} ref={setCodeRef}>
+        {this.props.code}
+      </code>
+    );
   }
 
-  private click = (e: any) => {
-    this.setState((state: IBlockState, props: IBlockProps) => ({
-      hl: state.hl !== Highlight.None ? state.hl : (props.typ === BlockType.Good ? Highlight.Good : Highlight.Bad),
-    }));
-  }
-
-  private setCodeRef = (element: HTMLPreElement) => {
-    if (element !== null) {
-      Prism.highlightElement(element, false);
-    }
+  private click = () => {
+    this.setState((state: IBlockState, props: IBlockProps) => {
+      if (state.hl === Highlight.None) {
+        return { hl: blockTypeToHighlight(props.typ) };
+      } else {
+        return state;
+      }
+    });
   };
 }
 
