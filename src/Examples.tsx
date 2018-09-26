@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 
+import * as Block from "./Block";
 import * as Snippet from "./Snippet";
 
 import Registry from "./ExampleRegistry";
@@ -11,12 +12,17 @@ interface IExample {
 }
 
 function ParseExample(ex: IExample): Snippet.ISnippetProps {
+  const typtag = {
+    'N': Block.BlockType.Ignore,
+    'G': Block.BlockType.Good,
+    'B': Block.BlockType.Bad,
+  };
   const blocks = ex.code
     .split('@')
     .slice(1)
     .map((s) => ({
       code: s.slice(1),
-      good: s[0] === 'G',
+      typ: typtag[s[0]],
     }));
 
   return {
