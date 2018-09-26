@@ -6,10 +6,10 @@ const ex = {
 
 @Btemperature1 = 40.0
 temperature2 = 50.0
-@G
+@N
 @Bconverted_temperature1 = (temperature1 - 32) * 5.0/9
 @Bprint(temperature1, "degrees farenheit is", converted_temperature1, "degrees Celsius")
-
+@N
 @Bconverted_temperature2 = (temperature2 - 32) * 5.0/9
 @Bprint(temperature2, "degrees farenheit is", converted_temperature2, "degrees Celsius")
 `,
