@@ -59,10 +59,12 @@ class Block extends React.Component<IBlockProps, IBlockState> {
   }
 
   public render() {
-    const classes = "language-" + this.props.language + " block " +
-      highlightCssClass(this.state.hl);
     return (
-      <code className={classes} onClick={this.click} ref={setCodeRef}>
+      <code
+        className={`language-${this.props.language} block ${highlightCssClass(this.state.hl)}`}
+        onClick={this.click}
+        ref={setCodeRef}
+      >
         {this.props.code}
       </code>
     );
