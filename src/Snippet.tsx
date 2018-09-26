@@ -21,7 +21,7 @@ class Snippet extends React.Component<ISnippetProps, {}> {
       children.push(<Block.Block key={i} {...this.props.blocks[i]} language={this.props.lang}/>);
     }
     return (
-      <pre className={"language-" + this.props.lang}>
+      <pre className={`language-${this.props.lang}`}>
         {children}
       </pre>
     );
