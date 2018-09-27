@@ -6,10 +6,10 @@ import Simple from './examples/Simple';
 
 const Registry = {
   "simple": Simple,
-  "basic control flow": BasicControlFlow,
-  "basic DRY": BasicDRY,
-  "basic logic": BasicLogic,
-  "medium logic": MediumLogic,
+  "basic-control-flow": BasicControlFlow,
+  "basic-DRY": BasicDRY,
+  "basic-logic": BasicLogic,
+  "medium-logic": MediumLogic,
 };
 
 export default Registry;
