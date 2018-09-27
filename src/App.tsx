@@ -1,7 +1,8 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { HashRouter as Router, Link, Route } from 'react-router-dom';
 
 import Registry from './ExampleRegistry';
+import { Example } from './Examples';
 
 function ExampleLinks() {
   const examples = Object.keys(Registry)
@@ -15,17 +16,17 @@ function ExampleLinks() {
   );
 }
 
-class App extends React.Component {
-  public render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Yiddish Cornstarch</h1>
-        </header>
-        <ExampleLinks />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <Router>
+    <div className="App">
+      <header className="App-header">
+        <h1 className="App-title">Yiddish Cornstarch</h1>
+      </header>
+
+      <ExampleLinks />
+      <Route path="/examples/:name" component={Example} />
+    </div>
+  </Router>
+);
 
 export default App;

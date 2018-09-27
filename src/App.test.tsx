@@ -1,8 +1,9 @@
+import React from 'react';
 import * as ReactDOM from 'react-dom';
-import Routes from './Routes';
+import App from './App';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(Routes(), div);
+  ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
