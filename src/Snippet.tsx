@@ -1,8 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 
-import './snippet.css';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-python.min.js';
+import 'prismjs/themes/prism-okaidia.css';
 
 import * as Block from './Block'
+import './snippet.css';
+
 
 interface ISnippetProps {
   blocks: Block.IBlock[];
@@ -10,19 +14,19 @@ interface ISnippetProps {
 }
 
 class Snippet extends React.Component<ISnippetProps, {}> {
-  constructor(props: ISnippetProps) {
-    super(props);
-    this.state = {};
+  // Note that routing doesn't necessarily remount components, so we need to
+  // re-highlight on update instead of mounting to make sure we always have
+  // highlighted code.
+  public componentDidUpdate() {
+    Prism.highlightAll();
   }
 
   public render() {
-    const children = [];
-    for (let i = 0; i < this.props.blocks.length; i++) {
-      children.push(<Block.Block key={i} {...this.props.blocks[i]} language={this.props.lang}/>);
-    }
     return (
       <pre className={`language-${this.props.lang}`}>
-        {children}
+        {this.props.blocks.map((block, ii) =>
+          <Block.Block key={ii} {...this.props.blocks[ii]} language={this.props.lang} />
+        )}
       </pre>
     );
   }
