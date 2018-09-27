@@ -1,5 +1,3 @@
-/* tslint:disable:max-classes-per-file */
-// TODO(zhyty): reenable max-classes-per-file once we're past playing around.
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
