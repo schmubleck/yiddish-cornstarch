@@ -50,7 +50,7 @@ class Block extends React.Component<IBlockProps, IBlockState> {
   public render() {
     return (
       <code
-        className={`language-${this.props.language} block ${highlightCssClass(this.state.hl)}`}
+        className={`language-${this.props.language} block ${highlightCssClass(this.state.hl)} is-marginless`}
         onClick={this.click}
       >
         {this.props.code}

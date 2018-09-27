@@ -8,6 +8,7 @@ import './prism-okaidia-with-prefix.css';
 import * as Block from './Block'
 import './snippet.css';
 
+// Avoid clashing with basically all css frameworks.
 Prism.plugins.customClass.prefix('prism--');
 
 interface ISnippetProps {
