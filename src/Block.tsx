@@ -1,9 +1,4 @@
-import * as React from 'react';
-
-import Prism from 'prismjs';
-
-import 'prismjs/components/prism-python.min.js';
-import 'prismjs/themes/prism-okaidia.css';
+import React from 'react';
 
 enum BlockType {
   Ignore,
@@ -35,12 +30,6 @@ interface IBlockState {
   hl: Highlight;
 }
 
-function setCodeRef(element: HTMLPreElement) {
-  if (element !== null) {
-    Prism.highlightElement(element, false);
-  }
-}
-
 function blockTypeToHighlight(blockType: BlockType) {
   switch(blockType) {
     case BlockType.Good:
@@ -63,7 +52,6 @@ class Block extends React.Component<IBlockProps, IBlockState> {
       <code
         className={`language-${this.props.language} block ${highlightCssClass(this.state.hl)}`}
         onClick={this.click}
-        ref={setCodeRef}
       >
         {this.props.code}
       </code>
