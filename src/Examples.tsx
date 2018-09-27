@@ -49,7 +49,9 @@ class Example extends React.Component<RouteComponentProps<IMatchParams>, {}> {
     if (name in Registry) {
       return (
         <div>
-          <h1>Find the lines that should be changed/fixed</h1>
+          <h2 className="title is-4">
+            Find the lines that should be changed/fixed
+          </h2>
           <Snippet.Snippet {...GetExample(name)} />
         </div>
       );
