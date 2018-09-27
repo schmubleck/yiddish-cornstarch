@@ -2,11 +2,13 @@ import React from 'react';
 
 import Prism from 'prismjs';
 import 'prismjs/components/prism-python.min.js';
-import 'prismjs/themes/prism-okaidia.css';
+import 'prismjs/plugins/custom-class/prism-custom-class.min.js';
+import './prism-okaidia-with-prefix.css';
 
 import * as Block from './Block'
 import './snippet.css';
 
+Prism.plugins.customClass.prefix('prism--');
 
 interface ISnippetProps {
   blocks: Block.IBlock[];
