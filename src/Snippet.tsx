@@ -20,6 +20,10 @@ class Snippet extends React.Component<ISnippetProps, {}> {
   // Note that routing doesn't necessarily remount components, so we need to
   // re-highlight on update instead of mounting to make sure we always have
   // highlighted code.
+  public componentDidMount() {
+    Prism.highlightAll();
+  }
+
   public componentDidUpdate() {
     Prism.highlightAll();
   }
