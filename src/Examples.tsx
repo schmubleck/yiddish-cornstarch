@@ -40,10 +40,6 @@ interface IMatchParams {
 }
 
 class Example extends React.Component<RouteComponentProps<IMatchParams>, {}> {
-  constructor(props: RouteComponentProps<IMatchParams>) {
-    super(props);
-  }
-
   public render() {
     const name = this.props.match.params.name;
     if (name in Registry) {
