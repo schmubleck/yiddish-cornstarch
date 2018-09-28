@@ -1,5 +1,10 @@
 import React from 'react';
-import { HashRouter as Router, Link, Route, RouteComponentProps, Switch } from 'react-router-dom';
+import {
+  Link,
+  Route,
+  RouteComponentProps,
+  Switch
+} from 'react-router-dom';
 
 import 'bulma/css/bulma.css';
 
@@ -30,40 +35,38 @@ const ExampleLinks = () => (
 );
 
 const App = () => (
-  <Router>
-    <div className="App">
+  <div className="App">
 
-      <nav className="App-header navbar is-spaced has-shadow">
-        <div className="container">
-          <div className="navbar-brand">
-            <div className="navbar-item">
-              <h1 className="App-title title">
-                <Link to={"/"}>Yiddish Cornstarch</Link>
-              </h1>
-            </div>
+    <nav className="App-header navbar is-spaced has-shadow">
+      <div className="container">
+        <div className="navbar-brand">
+          <div className="navbar-item">
+            <h1 className="App-title title">
+              <Link to={"/"}>Yiddish Cornstarch</Link>
+            </h1>
           </div>
         </div>
-      </nav>
+      </div>
+    </nav>
 
-      <section className="section">
-        <div className="container">
-          <div className="columns">
-            <div className="column is-one-fifth">
-              <ExampleLinks />
-            </div>
-            <div className="column">
-              <Switch>
-                <Route exact={true} path="/" component={Welcome} />
-                <Route path="/examples/:name" component={Example} />
-                <Route component={Generic404} />
-              </Switch>
-            </div>
+    <section className="section">
+      <div className="container">
+        <div className="columns">
+          <div className="column is-one-fifth">
+            <ExampleLinks />
+          </div>
+          <div className="column">
+            <Switch>
+              <Route exact={true} path="/" component={Welcome} />
+              <Route path="/examples/:name" component={Example} />
+              <Route component={Generic404} />
+            </Switch>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-    </div>
-  </Router>
+  </div>
 );
 
 export default App;
