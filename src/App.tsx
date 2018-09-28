@@ -1,18 +1,30 @@
 import React from 'react';
-import { HashRouter as Router, Link, Route } from 'react-router-dom';
+import { HashRouter as Router, Link, Route, RouteComponentProps, Switch } from 'react-router-dom';
 
 import 'bulma/css/bulma.css';
 
 import Registry from './ExampleRegistry';
 import { Example } from './Examples';
+import Generic404 from './Generic404';
+import Welcome from './Welcome';
+
+function ExampleLinksItem(name: string) {
+  const path = `/examples/${name}`;
+  const item = (props: RouteComponentProps<{}>) => (
+    <li>
+      <Link to={path} className={props.match ? "is-active" : ""}>
+        {name}
+      </Link>
+    </li>
+  );
+  return <Route key={name} exact={true} path={path} children={item} />;
+}
 
 const ExampleLinks = () => (
   <aside className="menu">
     <p className="menu-label">Examples</p>
     <ul className="menu-list">
-      {Object.keys(Registry).map((name) =>
-        <li key={name}><Link to={`/examples/${name}`}>{name}</Link></li>
-      )}
+      {Object.keys(Registry).map(ExampleLinksItem)}
     </ul>
   </aside>
 );
@@ -40,7 +52,11 @@ const App = () => (
               <ExampleLinks />
             </div>
             <div className="column">
-              <Route path="/examples/:name" component={Example} />
+              <Switch>
+                <Route exact={true} path="/" component={Welcome} />
+                <Route path="/examples/:name" component={Example} />
+                <Route component={Generic404} />
+              </Switch>
             </div>
           </div>
         </div>

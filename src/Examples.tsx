@@ -55,7 +55,7 @@ class Example extends React.Component<RouteComponentProps<IMatchParams>, {}> {
       return (
         <div>
           <Link to="/">
-            <h1>Example {name} not found.  Click here to return home.</h1>
+            <h1>Example {name} not found. Click here to return home.</h1>
           </Link>
         </div>
       );
