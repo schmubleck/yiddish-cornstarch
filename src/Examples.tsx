@@ -48,7 +48,7 @@ class Example extends React.Component<RouteComponentProps<IMatchParams>, {}> {
           <h2 className="title is-4">
             Find the lines that should be changed/fixed
           </h2>
-          <Snippet.Snippet {...GetExample(name)} />
+          <Snippet.Snippet key={name} {...GetExample(name)} />
         </div>
       );
     } else {
