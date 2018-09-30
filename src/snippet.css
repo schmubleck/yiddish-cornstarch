@@ -3,9 +3,12 @@ code.block {
     border-radius: 5px;
     display: block;
 }
-code.block.none:hover {
+code.block.none:not(.locked):hover, code.block.hidden:hover {
     background: #4c4e41;
     cursor: grab;
+}
+code.block.hidden {
+    background: #554444;
 }
 code.block.bad {
     background: #ff00009c;

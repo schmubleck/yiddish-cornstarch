@@ -28,6 +28,7 @@ function ParseExample(ex: IExample): Snippet.ISnippetProps {
   return {
     blocks,
     lang: ex.lang,
+    locked: false
   };
 }
 
@@ -35,20 +36,48 @@ function GetExample(name: string) {
   return ParseExample(Registry[name]);
 }
 
+function GetSolution(name: string) {
+  return ParseExample(Registry[name]);
+}
+
 interface IMatchParams {
   name: string;
 }
 
-class Example extends React.Component<RouteComponentProps<IMatchParams>, {}> {
+interface IExampleState {
+  submitted: boolean;
+}
+
+class Example extends React.Component<RouteComponentProps<IMatchParams>, IExampleState> {
+  constructor(props: RouteComponentProps<IMatchParams>) {
+    super(props);
+    this.state = {submitted: false};
+    this.submit = this.submit.bind(this);
+  }
+
   public render() {
     const name = this.props.match.params.name;
     if (name in Registry) {
+      const question = GetExample(name);
+      if (this.state.submitted) {
+        return (
+          <div>
+            <h2 className="title is-4">
+              Submitted code:
+            </h2>
+            <Snippet.Snippet {...question} locked={true}/>
+            <Snippet.Snippet {...GetSolution(name)} locked={true} />
+          </div>
+        );
+      }
+
       return (
         <div>
           <h2 className="title is-4">
             Find the lines that should be changed/fixed
           </h2>
-          <Snippet.Snippet key={name} {...GetExample(name)} />
+          <Snippet.Snippet {...question} locked={false} />
+          <button onClick={this.submit}>Submit</button>
         </div>
       );
     } else {
@@ -60,6 +89,12 @@ class Example extends React.Component<RouteComponentProps<IMatchParams>, {}> {
         </div>
       );
     }
+  }
+
+  private submit = (e: any) => {
+    this.setState((state: IExampleState) => ({
+      submitted: true
+    }));
   }
 }
 
