@@ -18,12 +18,16 @@ interface IBlockProps extends IBlock {
 
 enum Highlight {
   None = 1,
+  Hidden,
   Ignore,
   Good,
   Bad,
 }
 
-function highlightCssClass(h: Highlight) {
+function highlightCssClass(h: Highlight, revealed: boolean) {
+  if (!revealed && h !== Highlight.None) {
+    return "hidden";
+  }
   return Highlight[h].toLowerCase();
 }
 
@@ -52,7 +56,7 @@ class Block extends React.Component<IBlockProps, IBlockState> {
     const classes = [
       "language-" + this.props.language,
       "block",
-      highlightCssClass(this.state.hl),
+      highlightCssClass(this.state.hl, this.props.locked),
       "is-marginless"
     ]
 
