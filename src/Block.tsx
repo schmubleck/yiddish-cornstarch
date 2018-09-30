@@ -76,10 +76,14 @@ class Block extends React.Component<IBlockProps, IBlockState> {
 
   private click = () => {
     this.setState((state: IBlockState, props: IBlockProps) => {
-      if (!this.props.locked && state.hl === Highlight.None) {
+      if (this.props.locked) {
+        return state;
+      }
+
+      if (state.hl === Highlight.None) {
         return { hl: blockTypeToHighlight(props.typ) };
       } else {
-        return state;
+        return { hl: Highlight.None };
       }
     });
   };
