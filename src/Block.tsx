@@ -69,7 +69,7 @@ class Block extends React.Component<IBlockProps, IBlockState> {
       classes.push("submitted");
 
       const submittedAnswer = currentAnswer(this.state.hl);
-      // const isCorrect = (submittedAnswer === this.props.typ);
+      let resultClasses = (submittedAnswer === this.props.typ) ? "result-icon" : "result-icon incorrect";
 
       let submittedClasses = classes.join(" ");
       let actualClasses = classes.join(" ");
@@ -78,6 +78,8 @@ class Block extends React.Component<IBlockProps, IBlockState> {
         submittedClasses = submittedClasses + " bad";
         if (this.props.typ === BlockType.Good) {
           actualClasses = actualClasses + " good";
+        } else {
+          resultClasses = "result-icon correct";
         }
       }
 
@@ -90,6 +92,8 @@ class Block extends React.Component<IBlockProps, IBlockState> {
           <code className={submittedClasses} onClick={this.click}>
             {this.props.code}
           </code>
+
+          <span className={resultClasses} />
 
           <code className={actualClasses} onClick={this.click}>
             {this.props.code}
