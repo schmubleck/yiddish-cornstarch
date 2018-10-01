@@ -1,7 +1,10 @@
+span.code-line {
+    width: 100%;
+    display: block;
+}
 code.block {
     width: 100%;
-    border-radius: 5px;
-    display: block;
+    display: inline-block;
 }
 code.block.none:not(.submitted):hover, code.block.hidden:hover {
     background: #4c4e41;
@@ -15,4 +18,8 @@ code.block.bad {
 }
 code.block.good {
     background: #3dea73a3;
+}
+code.block.submitted {
+    display: inline-block;
+    width: 50%;
 }
