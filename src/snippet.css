@@ -7,17 +7,19 @@ code.block {
     display: inline-block;
 }
 code.block.none:not(.submitted):hover, code.block.hidden:hover {
-    background: #4c4e41;
+    background: #f8f8f233;
     cursor: grab;
 }
 code.block.hidden {
-    background: #554444;
+    background: #f9267233;
 }
 code.block.bad {
-    background: #ff00009c;
+    /*background: #6600009c;*/
+    background: #f9267233;
 }
 code.block.good {
-    background: #3dea73a3;
+    /*background: #0077339c;*/
+    background: #a6e22e33;
 }
 code.block.submitted {
     display: inline-block;
