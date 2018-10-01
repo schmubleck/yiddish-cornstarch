@@ -51,7 +51,7 @@ class Block extends React.Component<IBlockProps, IBlockState> {
     const classes = [
       `language-${this.props.language}`,
       "block",
-      "is-marginless"
+       "is-marginless"
     ]
 
     function currentAnswer(hl: Highlight) : BlockType {
@@ -88,7 +88,7 @@ class Block extends React.Component<IBlockProps, IBlockState> {
       }
 
       return (
-        <span className="code-line">
+        <pre className="code-line is-marginless">
           <code className={submittedClasses} onClick={this.click}>
             {this.props.code}
           </code>
@@ -98,7 +98,7 @@ class Block extends React.Component<IBlockProps, IBlockState> {
           <code className={actualClasses} onClick={this.click}>
             {this.props.code}
           </code>
-        </span>
+        </pre>
       );
     }
 
@@ -109,11 +109,11 @@ class Block extends React.Component<IBlockProps, IBlockState> {
     }
 
     return (
-      <span className="code-line">
+      <pre className="code-line is-marginless">
         <code className={classes.join(" ")} onClick={this.click}>
           {this.props.code}
         </code>
-      </span>
+      </pre>
     );
   }
 
