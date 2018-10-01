@@ -7,21 +7,21 @@ describe('highlighting', () => {
     code: "print(\"You had me at hello\")",
     typ: BlockType.Good,
     language: "foo",
-    locked: false
+    submitted: false
   };
 
   const badBlockProps = {
     code: "print(\"You had me at goodbye\")",
     typ: BlockType.Bad,
     language: "bar",
-    locked: false
+    submitted: false
   };
 
   const ignoreBlockProps = {
     code: "print(\"You had me at schmubleck\")",
     typ: BlockType.Ignore,
     language: "schmubleck",
-    locked: false
+    submitted: false
   };
 
   it('has no highlight before click', () => {

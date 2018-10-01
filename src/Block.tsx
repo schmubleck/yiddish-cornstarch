@@ -13,7 +13,7 @@ interface IBlock {
 
 interface IBlockProps extends IBlock {
   language: string;
-  locked: boolean;
+  submitted: boolean;
 }
 
 enum Highlight {
@@ -59,12 +59,12 @@ class Block extends React.Component<IBlockProps, IBlockState> {
     const classes = [
       `language-${this.props.language}`,
       "block",
-      highlightCssClass(this.state.hl, this.props.locked),
+      highlightCssClass(this.state.hl, this.props.submitted),
       "is-marginless"
     ]
 
-    if (this.props.locked) {
-      classes.push("locked");
+    if (this.props.submitted) {
+      classes.push("submitted");
     }
 
     return (
@@ -76,7 +76,7 @@ class Block extends React.Component<IBlockProps, IBlockState> {
 
   private click = () => {
     this.setState((state: IBlockState, props: IBlockProps) => {
-      if (this.props.locked) {
+      if (this.props.submitted) {
         return state;
       }
 
