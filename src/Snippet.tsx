@@ -12,6 +12,7 @@ import './snippet.css';
 Prism.plugins.customClass.prefix('prism--');
 
 interface ISnippetProps {
+  keyPrefix: string; // used to prefix block keys to ensure uniqueness.
   blocks: Block.IBlock[];
   lang: string;
   locked: boolean;
@@ -33,7 +34,11 @@ class Snippet extends React.Component<ISnippetProps, {}> {
     return (
       <pre className={`language-${this.props.lang}`}>
         {this.props.blocks.map((block, ii) =>
-          <Block.Block key={ii} {...this.props.blocks[ii]} language={this.props.lang} locked={this.props.locked} />
+          <Block.Block
+            key={`${this.props.keyPrefix}-${ii}`}
+            {...this.props.blocks[ii]}
+            language={this.props.lang}
+            locked={this.props.locked} />
         )}
       </pre>
     );

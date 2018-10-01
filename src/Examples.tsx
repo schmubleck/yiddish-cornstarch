@@ -11,7 +11,13 @@ interface IExample {
     code: string;
 }
 
-function ParseExample(ex: IExample): Snippet.ISnippetProps {
+interface IParsedExample {
+  blocks: Block.IBlock[];
+  lang: string;
+  locked: boolean;
+};
+
+function ParseExample(ex: IExample): IParsedExample {
   const typtag = {
     'N': Block.BlockType.Ignore,
     'G': Block.BlockType.Good,
@@ -44,50 +50,54 @@ interface IMatchParams {
   name: string;
 }
 
+type IExampleProps = RouteComponentProps<IMatchParams>;
+
 interface IExampleState {
   submitted: boolean;
 }
 
-class Example extends React.Component<RouteComponentProps<IMatchParams>, IExampleState> {
-  constructor(props: RouteComponentProps<IMatchParams>) {
+const ExampleNotFound = (props: IMatchParams) => (
+    <div>
+      <Link to="/">
+        <h1>Example {props.name} not found. Click here to return home.</h1>
+      </Link>
+    </div>
+);
+
+class Example extends React.Component<IExampleProps, IExampleState> {
+  constructor(props: IExampleProps) {
     super(props);
     this.state = {submitted: false};
-    this.submit = this.submit.bind(this);
   }
 
   public render() {
     const name = this.props.match.params.name;
-    if (name in Registry) {
-      const question = GetExample(name);
-      if (this.state.submitted) {
-        return (
-          <div>
-            <h2 className="title is-4">
-              Submitted code:
-            </h2>
-            <Snippet.Snippet {...question} locked={true}/>
-            <Snippet.Snippet {...GetSolution(name)} locked={true} />
-          </div>
-        );
-      }
+    if (!(name in Registry)) {
+      return <ExampleNotFound name={name} />;
+    }
 
-      return (
-        <div>
-          <h2 className="title is-4">
-            Find the lines that should be changed/fixed
-          </h2>
-          <Snippet.Snippet {...question} locked={false} />
+    const example = GetExample(name);
+    return (
+      <div>
+        <h2 className="title is-4">
+          {this.state.submitted ?
+            "Submitted code:" :
+            `Example ${name}:`}
+        </h2>
+        <Snippet.Snippet {...example} keyPrefix={name} locked={this.state.submitted}/>
+        {this.state.submitted ?  (
+          <Snippet.Snippet {...GetSolution(name)} keyPrefix={name} locked={true} />
+        ) : (
           <button onClick={this.submit}>Submit</button>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <Link to="/">
-            <h1>Example {name} not found. Click here to return home.</h1>
-          </Link>
-        </div>
-      );
+        )}
+      </div>
+    );
+  }
+
+  // we need this hook to ensure we reset the state when switching to a new example.
+  public componentDidUpdate(prevProps: IExampleProps, prevState: IExampleState) {
+    if (this.props.match.params.name !== prevProps.match.params.name) {
+      this.setState({ submitted: false });
     }
   }
 
