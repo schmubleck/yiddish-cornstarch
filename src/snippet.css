@@ -1,10 +1,15 @@
-span.code-line {
+pre.code-line {
     width: 100%;
     display: block;
+    border-radius: 0em;
+    padding: 0em;
+    margin: 0em;
+    overflow: hidden;
 }
 code.block {
     width: 100%;
     display: inline-block;
+    padding: 0em 1em;
 }
 code.block.none:not(.submitted):hover, code.block.hidden:hover {
     background: #f8f8f233;
