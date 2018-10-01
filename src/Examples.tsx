@@ -88,7 +88,7 @@ class Example extends React.Component<IExampleProps, IExampleState> {
         {this.state.submitted ?  (
           <Snippet.Snippet {...GetSolution(name)} keyPrefix={name} locked={true} />
         ) : (
-          <button onClick={this.submit}>Submit</button>
+          <button className="button is-primary" onClick={this.submit}>Submit</button>
         )}
       </div>
     );
