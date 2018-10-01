@@ -43,7 +43,18 @@ function GetExample(name: string) {
 }
 
 function GetSolution(name: string) {
-  return ParseExample(Registry[name]);
+  const ex = Registry[name];
+  if ('solution' in ex) {
+    return {
+      blocks: [{
+        code: ex.solution,
+        typ: Block.BlockType.Ignore,
+      }],
+      lang: ex.lang,
+      locked: true,
+    };
+  }
+  return GetExample(name);
 }
 
 interface IMatchParams {
