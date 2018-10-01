@@ -15,7 +15,7 @@ interface ISnippetProps {
   keyPrefix: string; // used to prefix block keys to ensure uniqueness.
   blocks: Block.IBlock[];
   lang: string;
-  locked: boolean;
+  submitted: boolean;
 }
 
 class Snippet extends React.Component<ISnippetProps, {}> {
@@ -38,7 +38,7 @@ class Snippet extends React.Component<ISnippetProps, {}> {
             key={`${this.props.keyPrefix}-${ii}`}
             {...this.props.blocks[ii]}
             language={this.props.lang}
-            locked={this.props.locked} />
+            submitted={this.props.submitted} />
         )}
       </pre>
     );

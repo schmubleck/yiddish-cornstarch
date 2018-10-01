@@ -14,7 +14,7 @@ interface IExample {
 interface IParsedExample {
   blocks: Block.IBlock[];
   lang: string;
-  locked: boolean;
+  submitted: boolean;
 };
 
 function ParseExample(ex: IExample): IParsedExample {
@@ -34,7 +34,7 @@ function ParseExample(ex: IExample): IParsedExample {
   return {
     blocks,
     lang: ex.lang,
-    locked: false
+    submitted: false
   };
 }
 
@@ -51,7 +51,7 @@ function GetSolution(name: string) {
         typ: Block.BlockType.Ignore,
       }],
       lang: ex.lang,
-      locked: true,
+      submitted: true,
     };
   }
   return GetExample(name);
@@ -95,9 +95,9 @@ class Example extends React.Component<IExampleProps, IExampleState> {
             "Submitted code:" :
             `Example ${name}:`}
         </h2>
-        <Snippet.Snippet {...example} keyPrefix={name} locked={this.state.submitted}/>
+        <Snippet.Snippet {...example} keyPrefix={name} submitted={this.state.submitted}/>
         {this.state.submitted ?  (
-          <Snippet.Snippet {...GetSolution(name)} keyPrefix={name} locked={true} />
+          <Snippet.Snippet {...GetSolution(name)} keyPrefix={name} submitted={true} />
         ) : (
           <button className="button is-primary" onClick={this.submit}>Submit</button>
         )}
