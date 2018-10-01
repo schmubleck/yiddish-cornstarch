@@ -5,7 +5,7 @@ const ex = {
 # convert temperatures from farenheit to celsius
 
 @Btemperature1 = 40.0
-temperature2 = 50.0
+@Btemperature2 = 50.0
 @N
 @Bconverted_temperature1 = (temperature1 - 32) * 5.0/9
 @Bprint(temperature1, "degrees farenheit is", converted_temperature1, "degrees Celsius")

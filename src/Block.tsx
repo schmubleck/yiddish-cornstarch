@@ -102,10 +102,8 @@ class Block extends React.Component<IBlockProps, IBlockState> {
       );
     }
 
-    if (this.state.hl !== Highlight.None && this.state.hl !== Highlight.Ignore) {
-      classes.push("hidden");
-    } else {
-      classes.push("none");
+    if (this.state.hl !== Highlight.Ignore) {
+      classes.push(this.state.hl === Highlight.None ? "none" : "hidden");
     }
 
     return (
