@@ -25,9 +25,10 @@ enum Highlight {
 }
 
 function highlightCssClass(h: Highlight, revealed: boolean) {
-  if (!revealed && h !== Highlight.None) {
+  if (!revealed && h !== Highlight.None && h !== Highlight.Ignore) {
     return "hidden";
   }
+
   return Highlight[h].toLowerCase();
 }
 
@@ -49,12 +50,14 @@ function blockTypeToHighlight(blockType: BlockType) {
 class Block extends React.Component<IBlockProps, IBlockState> {
   constructor(props: IBlockProps) {
     super(props);
-    this.state = { hl: props.typ === BlockType.Ignore ? Highlight.Ignore : Highlight.None };
+    this.state = {
+      hl: props.typ === BlockType.Ignore ? Highlight.Ignore : Highlight.None
+    };
   }
 
   public render() {
     const classes = [
-      "language-" + this.props.language,
+      `language-${this.props.language}`,
       "block",
       highlightCssClass(this.state.hl, this.props.locked),
       "is-marginless"
@@ -65,10 +68,7 @@ class Block extends React.Component<IBlockProps, IBlockState> {
     }
 
     return (
-      <code
-        className={classes.join(" ")}
-        onClick={this.click}
-      >
+      <code className={classes.join(" ")} onClick={this.click}>
         {this.props.code}
       </code>
     );
