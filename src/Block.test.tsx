@@ -35,14 +35,14 @@ describe('highlighting', () => {
 
   it('highlights to proper type after click', () => {
     const goodBlockWrapper = shallow( <Block {...goodBlockProps} /> );
-    const badBlockWrapper = shallow( <Block {...badBlockProps} /> );
+    expect(goodBlockWrapper.is('.hidden')).toBe(false);
     goodBlockWrapper.find('code').simulate('click');
-    expect(badBlockWrapper.is('.bad')).toBe(false);
-    expect(goodBlockWrapper.is('.good')).toBe(true);
+    expect(goodBlockWrapper.is('.hidden')).toBe(true);
 
+    const badBlockWrapper = shallow( <Block {...badBlockProps} /> );
+    expect(badBlockWrapper.is('.hidden')).toBe(false);
     badBlockWrapper.find('code').simulate('click');
-    expect(badBlockWrapper.is('.good')).toBe(false);
-    expect(badBlockWrapper.is('.bad')).toBe(true);
+    expect(badBlockWrapper.is('.hidden')).toBe(true);
   });
 
   it('ignore blocks dont respond to clicks', () => {
