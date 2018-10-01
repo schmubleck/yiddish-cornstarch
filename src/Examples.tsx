@@ -42,21 +42,6 @@ function GetExample(name: string) {
   return ParseExample(Registry[name]);
 }
 
-function GetSolution(name: string) {
-  const ex = Registry[name];
-  if ('solution' in ex) {
-    return {
-      blocks: [{
-        code: ex.solution,
-        typ: Block.BlockType.Ignore,
-      }],
-      lang: ex.lang,
-      submitted: true,
-    };
-  }
-  return GetExample(name);
-}
-
 interface IMatchParams {
   name: string;
 }
@@ -91,16 +76,12 @@ class Example extends React.Component<IExampleProps, IExampleState> {
     return (
       <div>
         <h2 className="title is-4">
-          {this.state.submitted ?
-            "Submitted code:" :
-            `Example ${name}:`}
+          {`${name}:`}
         </h2>
         <Snippet.Snippet {...example} keyPrefix={name} submitted={this.state.submitted}/>
-        {this.state.submitted ?  (
-          <Snippet.Snippet {...GetSolution(name)} keyPrefix={name} submitted={true} />
-        ) : (
+        {!this.state.submitted &&
           <button className="button is-primary" onClick={this.submit}>Submit</button>
-        )}
+        }
       </div>
     );
   }
