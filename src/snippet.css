@@ -14,14 +14,26 @@ code.block.hidden {
     background: #f9267233;
 }
 code.block.bad {
-    /*background: #6600009c;*/
     background: #f9267233;
 }
 code.block.good {
-    /*background: #0077339c;*/
     background: #a6e22e33;
 }
 code.block.submitted {
     display: inline-block;
-    width: 50%;
+    width: 47%;
+}
+span.result-icon {
+    display: inline-block;
+    width: 6%;
+    text-align: center;
+}
+span.result-icon.incorrect:before {
+    color: #f92672;
+    content: "⨉";
+    font-size: 0.75em;
+}
+span.result-icon.correct:before {
+    color: #a6e22e;
+    content: "✓";
 }
